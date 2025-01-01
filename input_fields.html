@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input Field Relationships</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input {
+      margin: 10px;
+      padding: 10px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Input Field Relationships</h2>
+    <form>
+      <label for="firstField">First Field:</label>
+      <input type="number" id="firstField" oninput="updateFields()"><br>
+      <label for="secondField">Second Field (Twice First Field):</label>
+      <input type="number" id="secondField" disabled><br>
+      <label for="thirdField">Third Field (Square of First Field):</label>
+      <input type="number" id="thirdField" disabled><br>
+    </form>
+  </div>
+
+  <script>
+    function updateFields() {
+      const firstFieldValue = parseFloat(document.getElementById('firstField').value);
+      
+      if (!isNaN(firstFieldValue)) {
+        document.getElementById('secondField').value = firstFieldValue * 2;
+        document.getElementById('thirdField').value = firstFieldValue * firstFieldValue;
+      } else {
+        document.getElementById('secondField').value = '';
+        document.getElementById('thirdField').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
