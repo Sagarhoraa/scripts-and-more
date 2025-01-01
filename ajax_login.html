@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login Form</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="submitLogin()">Login</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const submitLogin = () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const messageElement = document.getElementById('message');
+
+      if (email === '' || password === '') {
+        messageElement.textContent = 'Both email and password are required';
+        return;
+      }
+
+      // Creating a new XMLHttpRequest object
+      const xhr = new XMLHttpRequest();
+      
+      // Configuring it: POST-request for the URL /login (assuming server route /login)
+      xhr.open('POST', '/login', true);
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+      
+      // Sending the request with the email and password
+      xhr.send(JSON.stringify({ email, password }));
+      
+      // Handling the response
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          messageElement.textContent = 'Login credentials accepted';
+        }
+      };
+    };
+  </script>
+</body>
+</html>
