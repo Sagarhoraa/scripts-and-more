@@ -1,0 +1,41 @@
+/* Step 25
+Now update your h1 selector to be header h1 to specifically target your h1 element within your new header. */
+* {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .label {
+    border: 2px solid black;
+    width: 270px;
+    margin: 20px auto;
+    padding: 0 7px;
+  }
+  
+  header h1  {
+    text-align: center;
+    margin: -4px 0;
+    letter-spacing: 0.15px
+  }
+  
+  p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .divider {
+    border-bottom: 1px solid #888989;
+    margin: 2px 0;
+  }
+  
+  .bold {
+    font-weight: 800;
+  }
