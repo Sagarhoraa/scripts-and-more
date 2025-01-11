@@ -1,0 +1,20 @@
+Step 9
+As described in the freeCodeCamp Style Guide, the logo should retain an aspect ratio of 35 / 4, and have padding around the text.
+
+First, change the background-color to #0a0a23 so you can see the logo. Then, use the aspect-ratio property to set the desired aspect ratio to 35 / 4. Finally, add a padding of 0.4rem all around.
+
+body {
+    background: #f5f6f7;
+    color: #1b1b32;
+    font-family: Helvetica;
+    margin: 0;
+  }
+  
+  #logo {
+    width: max(10rem, 18vw);
+    background-color: #0a0a23;
+    aspect-ratio: 35 / 4;
+    padding :0.4rem;
+  
+  }
+  
