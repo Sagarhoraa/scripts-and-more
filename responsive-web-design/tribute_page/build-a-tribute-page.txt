@@ -1,0 +1,45 @@
+** start of undefined **
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Tribute page</title>
+</head>
+<body>
+  <style>
+    
+    #image
+    {
+     display:block;
+     max-width:100%;
+     height:auto;
+     margin:0 auto;
+     
+    }
+    
+
+  </style>  
+    <main id="main">
+      <div id="img-div">
+        <img id="image">
+         <div id="img-caption">image</div>
+      </div>
+      <div id="image"></div>
+      <div id="tribute-info">tribute</div>
+     <a id="tribute-link" href="" target="_blank" >clickhere</a>
+    </main>  
+    
+</body>
+</html>
+
+** end of undefined **
+
+** start of undefined **
+
+
+
+** end of undefined **
+
