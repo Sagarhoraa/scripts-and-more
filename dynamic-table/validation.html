@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      width: 300px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <form id="userForm" onsubmit="return validateForm()">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName">
+    <div class="error" id="nameError"></div>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address">
+    <div class="error" id="addressError"></div>
+
+    <label for="telephone">Telephone:</label>
+    <input type="text" id="telephone" name="telephone">
+    <div class="error" id="telError"></div>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender">
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <div class="error" id="genderError"></div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <div class="error" id="emailError"></div>
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" name="country">
+    <div class="error" id="countryError"></div>
+
+    <label for="comments">Comments:</label>
+    <textarea id="comments" name="comments"></textarea>
+    <div class="error" id="commentsError"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      let isValid = true;
+
+      // Clear previous error messages
+      document.querySelectorAll('.error').forEach(error => error.textContent = '');
+
+      // Get form values
+      const fullName = document.getElementById('fullName');
+      const address = document.getElementById('address');
+      const telephone = document.getElementById('telephone');
+      const gender = document.getElementById('gender');
+      const email = document.getElementById('email');
+      const country = document.getElementById('country');
+      const comments = document.getElementById('comments');
+
+      // Validate Full Name
+      if (fullName.value.trim() === '') {
+        document.getElementById('nameError').textContent = 'Full Name is required.';
+        fullName.focus();
+        isValid = false;
+      }
+
+      // Validate Address
+      if (isValid && address.value.trim() === '') {
+        document.getElementById('addressError').textContent = 'Address is required.';
+        address.focus();
+        isValid = false;
+      }
+
+      // Validate Telephone
+      const telRegex = /^[0-9]{10}$/; // Assumes 10-digit numbers
+      if (isValid && !telRegex.test(telephone.value.trim())) {
+        document.getElementById('telError').textContent = 'Enter a valid 10-digit phone number.';
+        telephone.focus();
+        isValid = false;
+      }
+
+      // Validate Gender
+      if (isValid && gender.value === '') {
+        document.getElementById('genderError').textContent = 'Please select a gender.';
+        gender.focus();
+        isValid = false;
+      }
+
+      // Validate Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (isValid && !emailRegex.test(email.value.trim())) {
+        document.getElementById('emailError').textContent = 'Enter a valid email address.';
+        email.focus();
+        isValid = false;
+      }
+
+      // Validate Country
+      if (isValid && country.value.trim() === '') {
+        document.getElementById('countryError').textContent = 'Country is required.';
+        country.focus();
+        isValid = false;
+      }
+
+      // Validate Comments
+      if (isValid && comments.value.trim() === '') {
+        document.getElementById('commentsError').textContent = 'Comments cannot be empty.';
+        comments.focus();
+        isValid = false;
+      }
+
+      return isValid; // Prevent form submission if validation fails
+    }
+  </script>
+</body>
+</html>
