@@ -1,63 +1,33 @@
 <?php
-// Start the session
-session_start();
+    session_start();
+    $servername="localhost";
+    $username="root";
+    $password="";
+    $dbname="login";
+    
+  //create connection
+  $conn = new mysqli($servername,$username,"",$dbname); 
+  //check connection
+  if($conn->connect_error){
+    die("connection failed.".$conn->connect_error);
+  }
+  if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $user = $_POST['username'];
+    $pass =$_POST['password'];
+    
+//Prepare and bind
+ $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+ $stmt->bind_param("ss", $user, $pass); 
+ $stmt->execute(); $result = $stmt->get_result();
 
-// Database connection
-$host = 'localhost';
-$db = 'your_database_name';
-$user = 'your_database_user';
-$pass = 'your_database_password';
-$conn = mysqli_connect($host, $user, $pass, $db);
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Handle login
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    $sql = "SELECT * FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-    $user = mysqli_fetch_assoc($result);
-
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        header('Location: ?action=dashboard');
-        exit;
-    } else {
-        echo "Invalid username or password.";
+    if($result -> num_rows >0){
+        $_SESSION['username']=$user;
+        header("location: dashboard.php");
     }
-}
-
-// Handle logout
-if (isset($_GET['action']) && $_GET['action'] == 'logout') {
-    session_destroy();
-    header('Location: ?action=login');
-    exit;
-}
-
-// Display login form
-if (!isset($_SESSION['user_id']) && (!isset($_GET['action']) || $_GET['action'] == 'login')) {
-    echo '
-    <form method="post" action="">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
-    </form>
-    ';
-    exit;
-}
-
-// Display dashboard
-if (isset($_SESSION['user_id'])) {
-    echo '
-    <h1>Welcome to the Dashboard</h1>
-    <a href="?action=logout">Logout</a>
-    ';
-    exit;
-}
-?>
+    else{
+        echo"Invaild username or password";
+    }
+  }
+  $conn->close();
+  ?>
